@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benjamin T. Rossen | Pianist, Composer, Conductor</title>
+    <link rel="icon" type="image/png" href="B_s_Logo-removebg-preview.png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1DA1F2;
+            --deep-blue: #0077B5;
+            --light-blue: #E8F4FD;
+            --warm-coral: #C96B6B;
+            --soft-peach: #F5E6E0;
+            --text-dark: #1A1A1A;
+            --text-light: #FFFFFF;
+            --accent-gold: #D4A574;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            height: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--text-light) 50%, var(--soft-peach) 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 70%;
+            height: 140%;
+            background: radial-gradient(circle, rgba(29, 161, 242, 0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-30px, 30px) rotate(5deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            padding: 2rem;
+        }
+
+        .hero-image {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center top;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 60px rgba(29, 161, 242, 0.3);
+            border: 5px solid var(--text-light);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--deep-blue);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            font-weight: 500;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator span {
+            display: block;
+            width: 30px;
+            height: 50px;
+            border: 2px solid var(--primary-blue);
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .scroll-indicator span::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            animation: scroll 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        @keyframes scroll {
+            0% { opacity: 1; top: 8px; }
+            100% { opacity: 0; top: 30px; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 5%;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+            line-height: 1.8;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--text-light);
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            gap: 3rem;
+        }
+
+        .about-text {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: #444;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-highlight {
+            background: linear-gradient(135deg, var(--light-blue), var(--soft-peach));
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .about-highlight h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--deep-blue);
+        }
+
+        .credentials {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .credential-tag {
+            background: var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--deep-blue);
+        }
+
+        /* Roles Section */
+        .roles {
+            background: linear-gradient(180deg, var(--light-blue) 0%, var(--text-light) 100%);
+        }
+
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .role-card {
+            background: var(--text-light);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .role-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--warm-coral));
+        }
+
+        .role-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(29, 161, 242, 0.2);
+        }
+
+        .role-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .role-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--deep-blue);
+        }
+
+        .role-card p {
+            color: #666;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* Media Section */
+        .media {
+            background: var(--text-light);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .video-card {
+            background: var(--text-light);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-info h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Featured Performance */
+        .featured-performance {
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            background: linear-gradient(135deg, var(--light-blue), var(--soft-peach));
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .featured-performance .video-wrapper {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .featured-label {
+            text-align: center;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--deep-blue);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        /* Audio Section */
+        .audio-section {
+            background: linear-gradient(135deg, var(--deep-blue), var(--primary-blue));
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .audio-section .section-title {
+            color: var(--text-light);
+        }
+
+        .audio-section .section-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .audio-player-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .audio-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .audio-player {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .audio-note {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* Achievements Section */
+        .achievements {
+            background: var(--soft-peach);
+        }
+
+        .achievements-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .achievement-item {
+            background: var(--text-light);
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .achievement-item:hover {
+            transform: translateX(10px);
+        }
+
+        .achievement-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .achievement-text {
+            font-size: 1rem;
+            color: #444;
+        }
+
+        .achievement-text strong {
+            color: var(--deep-blue);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--text-dark);
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .contact .section-title {
+            color: var(--text-light);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .contact-link:hover {
+            background: var(--primary-blue);
+            border-color: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+
+        .contact-link svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Scroll Audio Controller */
+        #audio-controller {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary-blue);
+            color: var(--text-light);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(29, 161, 242, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: none;
+            font-size: 1.5rem;
+        }
+
+        #audio-controller:hover {
+            transform: scale(1.1);
+            background: var(--deep-blue);
+        }
+
+        #audio-controller.playing {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 10px 30px rgba(29, 161, 242, 0.4); }
+            50% { box-shadow: 0 10px 50px rgba(29, 161, 242, 0.8); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: var(--text-light);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.9rem;
+                letter-spacing: 0.15em;
+            }
+
+            .hero-image {
+                width: 200px;
+                height: 200px;
+            }
+
+            section {
+                padding: 4rem 5%;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .roles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #audio-controller {
+                width: 50px;
+                height: 50px;
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#hero">
+            <img src="B_s_Logo-removebg-preview.png" alt="Benjamin T. Rossen Logo" class="logo">
+        </a>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#about" onclick="closeMenu()">About</a></li>
+            <li><a href="#roles" onclick="closeMenu()">Artistry</a></li>
+            <li><a href="#media" onclick="closeMenu()">Performances</a></li>
+            <li><a href="#achievements" onclick="closeMenu()">Achievements</a></li>
+            <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Background Audio -->
+    <audio id="background-audio" loop>
+        <source src="Overture.m4a" type="audio/mp4">
+    </audio>
+
+    <!-- Audio Controller Button -->
+    <button id="audio-controller" onclick="toggleAudio()" title="Toggle music">
+        <span id="audio-icon">&#9835;</span>
+    </button>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <img src="Benjamin T. Rossen Photo.JPG" alt="Benjamin T. Rossen" class="hero-image">
+            <h1>Benjamin T. Rossen</h1>
+            <p class="hero-subtitle">Pianist &bull; Composer &bull; Conductor &bull; Artistic Leader</p>
+        </div>
+        <div class="scroll-indicator">
+            <span></span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2 class="section-title">About</h2>
+        <p class="section-subtitle">A multifaceted artist dedicated to the future of live performing arts</p>
+
+        <div class="about-content">
+            <div class="about-text">
+                <p>Native New Yorker <strong>Benjamin T. Rossen</strong> is a pianist, composer, conductor, and fervent leader in live performing arts. He is on the teaching staff at Harvard University's Music Department and the former Executive Director of Lowell House Opera (LHO), the oldest performing opera company in New England.</p>
+
+                <p>Benjamin oversaw LHO's transformation through its largest multi-year fundraising campaign and four theatrical productions, including the 2024 world premiere of his original work <em>The Unknowable: An Operatic Ballet in Two Acts</em>. He was the music director and conductor of LHO's 2025 production of <em>Postcard from Morocco</em> by Dominick Argento.</p>
+
+                <p>He earned a Master of Music in Piano Performance from the New England Conservatory and a Bachelor of Arts in Economics and Music from Harvard University, graduating through the Harvard/NEC Dual Degree Program. He graduated from Harvard in three years.</p>
+            </div>
+
+            <div class="about-highlight">
+                <h3>Education & Recognition</h3>
+                <div class="credentials">
+                    <span class="credential-tag">Young Steinway Artist</span>
+                    <span class="credential-tag">2020 U.S. Presidential Scholar in the Arts</span>
+                    <span class="credential-tag">Harvard University</span>
+                    <span class="credential-tag">New England Conservatory</span>
+                    <span class="credential-tag">2018 YoungArts Finalist-Winner</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roles Section -->
+    <section class="roles" id="roles">
+        <h2 class="section-title">Artistry</h2>
+        <p class="section-subtitle">Four dimensions of musical expression and leadership</p>
+
+        <div class="roles-grid">
+            <div class="role-card">
+                <div class="role-icon">&#127929;</div>
+                <h3>Pianist</h3>
+                <p>Made his recital debut at age nine and concerto debut at Carnegie Hall at age ten. Has appeared as a guest artist with the Chamber Music Society of Lincoln Center, The Cliburn, and Music@Menlo. Quarterfinalist at the 2019 Cliburn International Junior Piano Competition.</p>
+            </div>
+
+            <div class="role-card">
+                <div class="role-icon">&#9834;</div>
+                <h3>Composer</h3>
+                <p>Creator of <em>The Unknowable: An Operatic Ballet in Two Acts</em>, which received its world premiere in 2024. His original overture for <em>The Merry Widow</em> won the 2023 Hugh F. MacColl Prize from the Harvard Music Department.</p>
+            </div>
+
+            <div class="role-card">
+                <div class="role-icon">&#127932;</div>
+                <h3>Conductor</h3>
+                <p>Music director and conductor of Lowell House Opera's 2025 production of <em>Postcard from Morocco</em>. Founded and directed the Harvard Ballet Orchestra, and served as Music Director of Harvard College Opera.</p>
+            </div>
+
+            <div class="role-card">
+                <div class="role-icon">&#10024;</div>
+                <h3>Artistic Leader</h3>
+                <p>Former Executive Director of Lowell House Opera, the oldest performing opera company in New England. Led the company through its largest multi-year fundraising campaign and four theatrical productions. Currently on the teaching staff at Harvard University's Music Department.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Section -->
+    <section class="media" id="media">
+        <h2 class="section-title">Performances</h2>
+        <p class="section-subtitle">Watch Benjamin's artistry come to life</p>
+
+        <!-- Featured Performance -->
+        <div class="featured-performance">
+            <p class="featured-label">Featured Performance</p>
+            <div class="video-wrapper">
+                <iframe
+                    src="https://www.youtube.com/embed/videoseries?list=UU_PqxTEqECxM3YJxGYR6LYw"
+                    title="Benjamin T. Rossen - Featured Performance"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+        <div class="video-grid">
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe
+                        src="https://www.youtube.com/embed/?listType=user_uploads&list=benjamin.t.rossen"
+                        title="Benjamin T. Rossen Performances"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="video-info">
+                    <h4>Piano Performances</h4>
+                    <p>Solo and chamber music performances</p>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe
+                        src="https://www.youtube.com/embed/videoseries?list=UU_PqxTEqECxM3YJxGYR6LYw"
+                        title="Recent Uploads"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="video-info">
+                    <h4>Latest Uploads</h4>
+                    <p>Recent performances and projects</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- YouTube Channel Link -->
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="https://www.youtube.com/@benjamin.t.rossen" target="_blank" class="contact-link" style="display: inline-flex; color: var(--text-dark); border-color: var(--primary-blue);">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                View All Performances on YouTube
+            </a>
+        </div>
+    </section>
+
+    <!-- Audio Player Section -->
+    <section class="audio-section" id="listen">
+        <h2 class="section-title">Listen</h2>
+        <p class="section-subtitle">Original composition by Benjamin T. Rossen</p>
+
+        <div class="audio-player-container">
+            <h3 class="audio-title">Overture</h3>
+            <audio controls class="audio-player">
+                <source src="Overture.m4a" type="audio/mp4">
+                Your browser does not support the audio element.
+            </audio>
+            <p class="audio-note">From <em>The Unknowable: An Operatic Ballet in Two Acts</em></p>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="achievements" id="achievements">
+        <h2 class="section-title">Achievements</h2>
+        <p class="section-subtitle">A journey of excellence and dedication</p>
+
+        <div class="achievements-list">
+            <div class="achievement-item">
+                <span class="achievement-icon">&#127942;</span>
+                <p class="achievement-text"><strong>Carnegie Hall Debut</strong> at age ten with the New York Concerti Sinfonietta</p>
+            </div>
+            <div class="achievement-item">
+                <span class="achievement-icon">&#127941;</span>
+                <p class="achievement-text"><strong>2020 U.S. Presidential Scholar in the Arts</strong> - one of the nation's highest honors for high school students</p>
+            </div>
+            <div class="achievement-item">
+                <span class="achievement-icon">&#127929;</span>
+                <p class="achievement-text"><strong>Young Steinway Artist</strong> - recognized by Steinway & Sons</p>
+            </div>
+            <div class="achievement-item">
+                <span class="achievement-icon">&#127894;</span>
+                <p class="achievement-text"><strong>2023 Hugh F. MacColl Prize</strong> from Harvard Music Department for original overture</p>
+            </div>
+            <div class="achievement-item">
+                <span class="achievement-icon">&#127928;</span>
+                <p class="achievement-text"><strong>Chamber Music Society of Lincoln Center</strong> guest artist</p>
+            </div>
+            <div class="achievement-item">
+                <span class="achievement-icon">&#127895;</span>
+                <p class="achievement-text"><strong>2019 Cliburn International Junior Piano Competition</strong> quarterfinalist</p>
+            </div>
+            <div class="achievement-item">
+                <span class="achievement-icon">&#9733;</span>
+                <p class="achievement-text"><strong>2018 YoungArts Foundation</strong> Finalist-Winner</p>
+            </div>
+            <div class="achievement-item">
+                <span class="achievement-icon">&#127979;</span>
+                <p class="achievement-text"><strong>Harvard/NEC Dual Degree</strong> - graduated from Harvard in three years</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Connect</h2>
+        <p class="section-subtitle" style="color: rgba(255,255,255,0.7);">For bookings, collaborations, and inquiries</p>
+
+        <div class="contact-links">
+            <a href="https://www.youtube.com/@benjamin.t.rossen" target="_blank" class="contact-link">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                YouTube
+            </a>
+            <a href="https://www.steinway.com/artists/benjamin-t-rossen" target="_blank" class="contact-link">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 22c-5.523 0-10-4.477-10-10S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+                    <path d="M12 6c-3.313 0-6 2.687-6 6s2.687 6 6 6 6-2.687 6-6-2.687-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
+                </svg>
+                Steinway Artist Profile
+            </a>
+            <a href="mailto:contact@benjaminrossen.com" class="contact-link">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                Email
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Benjamin T. Rossen. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+
+        function closeMenu() {
+            document.querySelector('.nav-links').classList.remove('active');
+        }
+
+        // Audio control
+        const audio = document.getElementById('background-audio');
+        const audioController = document.getElementById('audio-controller');
+        const audioIcon = document.getElementById('audio-icon');
+        let isPlaying = false;
+        let hasStarted = false;
+
+        function toggleAudio() {
+            if (isPlaying) {
+                audio.pause();
+                audioController.classList.remove('playing');
+                audioIcon.innerHTML = '&#9835;';
+                isPlaying = false;
+            } else {
+                audio.play().then(() => {
+                    audioController.classList.add('playing');
+                    audioIcon.innerHTML = '&#10074;&#10074;';
+                    isPlaying = true;
+                    hasStarted = true;
+                }).catch(e => {
+                    console.log('Audio play failed:', e);
+                });
+            }
+        }
+
+        // Start audio on first scroll
+        let scrollStarted = false;
+        window.addEventListener('scroll', () => {
+            if (!scrollStarted && !hasStarted && window.scrollY > 100) {
+                scrollStarted = true;
+                audio.volume = 0.3;
+                audio.play().then(() => {
+                    audioController.classList.add('playing');
+                    audioIcon.innerHTML = '&#10074;&#10074;';
+                    isPlaying = true;
+                    hasStarted = true;
+                }).catch(e => {
+                    console.log('Auto-play blocked:', e);
+                });
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.role-card, .video-card, .achievement-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
