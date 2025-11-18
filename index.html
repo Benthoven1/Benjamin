@@ -257,8 +257,6 @@
         .about-content {
             max-width: 900px;
             margin: 0 auto;
-            display: grid;
-            gap: 3rem;
         }
 
         .about-text {
@@ -271,104 +269,47 @@
             margin-bottom: 1.5rem;
         }
 
-        .about-highlight {
-            background: linear-gradient(135deg, var(--light-blue), var(--soft-peach));
-            padding: 2.5rem;
-            border-radius: 20px;
-            text-align: center;
-        }
-
-        .about-highlight h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--deep-blue);
-        }
-
-        .credentials {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .credential-tag {
-            background: var(--text-light);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--deep-blue);
-        }
-
-        /* Roles Section */
-        .roles {
+        /* Performances Section */
+        .performances {
             background: linear-gradient(180deg, var(--light-blue) 0%, var(--text-light) 100%);
         }
 
-        .roles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+        /* Filter Controls */
+        .filter-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
         }
 
-        .role-card {
-            background: var(--text-light);
-            padding: 3rem 2rem;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--primary-blue);
+            background: transparent;
+            color: var(--primary-blue);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            border-radius: 30px;
         }
 
-        .role-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-blue), var(--warm-coral));
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-blue);
+            color: var(--text-light);
         }
 
-        .role-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(29, 161, 242, 0.2);
-        }
-
-        .role-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .role-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--deep-blue);
-        }
-
-        .role-card p {
-            color: #666;
-            line-height: 1.7;
-            font-size: 0.95rem;
-        }
-
-        /* Media Section */
-        .media {
-            background: var(--text-light);
-        }
-
+        /* Video Grid */
         .video-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -377,11 +318,16 @@
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .video-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(29, 161, 242, 0.2);
+        }
+
+        .video-card.hidden {
+            display: none;
         }
 
         .video-wrapper {
@@ -411,111 +357,49 @@
         .video-info p {
             color: #666;
             font-size: 0.9rem;
+            margin-bottom: 0.5rem;
         }
 
-        /* Featured Performance */
-        .featured-performance {
-            max-width: 900px;
-            margin: 0 auto 4rem;
-            background: linear-gradient(135deg, var(--light-blue), var(--soft-peach));
-            border-radius: 20px;
-            padding: 2rem;
-        }
-
-        .featured-performance .video-wrapper {
-            border-radius: 15px;
-            overflow: hidden;
-        }
-
-        .featured-label {
-            text-align: center;
-            font-size: 0.85rem;
+        .video-category {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--light-blue);
+            color: var(--deep-blue);
+            font-size: 0.75rem;
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--deep-blue);
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        /* Audio Section */
-        .audio-section {
-            background: linear-gradient(135deg, var(--deep-blue), var(--primary-blue));
-            color: var(--text-light);
-            text-align: center;
-        }
-
-        .audio-section .section-title {
-            color: var(--text-light);
-        }
-
-        .audio-section .section-subtitle {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .audio-player-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .audio-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .audio-player {
-            width: 100%;
-            margin-bottom: 1rem;
-        }
-
-        .audio-note {
-            font-size: 0.85rem;
-            opacity: 0.8;
-        }
-
-        /* Achievements Section */
-        .achievements {
-            background: var(--soft-peach);
-        }
-
-        .achievements-list {
-            max-width: 800px;
-            margin: 0 auto;
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .achievement-item {
-            background: var(--text-light);
-            padding: 1.5rem 2rem;
+            letter-spacing: 0.05em;
             border-radius: 15px;
-            display: flex;
+        }
+
+        /* YouTube Channel Link */
+        .channel-link-container {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .channel-link {
+            display: inline-flex;
             align-items: center;
-            gap: 1.5rem;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
+            gap: 0.5rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border: 2px solid var(--primary-blue);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: 500;
         }
 
-        .achievement-item:hover {
-            transform: translateX(10px);
+        .channel-link:hover {
+            background: var(--primary-blue);
+            color: var(--text-light);
+            transform: translateY(-3px);
         }
 
-        .achievement-icon {
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .achievement-text {
-            font-size: 1rem;
-            color: #444;
-        }
-
-        .achievement-text strong {
-            color: var(--deep-blue);
+        .channel-link svg {
+            width: 20px;
+            height: 20px;
         }
 
         /* Contact Section */
@@ -571,39 +455,34 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Scroll Audio Controller */
-        #audio-controller {
+        /* Floating Mute Button */
+        #mute-btn {
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            background: var(--primary-blue);
+            background: rgba(0, 0, 0, 0.8);
             color: var(--text-light);
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 10px 30px rgba(29, 161, 242, 0.4);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
             z-index: 1000;
             border: none;
-            font-size: 1.5rem;
         }
 
-        #audio-controller:hover {
+        #mute-btn:hover {
             transform: scale(1.1);
-            background: var(--deep-blue);
+            background: var(--primary-blue);
         }
 
-        #audio-controller.playing {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 10px 30px rgba(29, 161, 242, 0.4); }
-            50% { box-shadow: 0 10px 50px rgba(29, 161, 242, 0.8); }
+        #mute-btn svg {
+            width: 24px;
+            height: 24px;
         }
 
         /* Responsive */
@@ -660,15 +539,25 @@
                 grid-template-columns: 1fr;
             }
 
-            .roles-grid {
-                grid-template-columns: 1fr;
+            .filter-controls {
+                gap: 0.5rem;
             }
 
-            #audio-controller {
-                width: 50px;
-                height: 50px;
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.75rem;
+            }
+
+            #mute-btn {
+                width: 40px;
+                height: 40px;
                 bottom: 1rem;
                 right: 1rem;
+            }
+
+            #mute-btn svg {
+                width: 18px;
+                height: 18px;
             }
         }
     </style>
@@ -686,9 +575,7 @@
         </div>
         <ul class="nav-links">
             <li><a href="#about" onclick="closeMenu()">About</a></li>
-            <li><a href="#roles" onclick="closeMenu()">Artistry</a></li>
-            <li><a href="#media" onclick="closeMenu()">Performances</a></li>
-            <li><a href="#achievements" onclick="closeMenu()">Achievements</a></li>
+            <li><a href="#performances" onclick="closeMenu()">Performances</a></li>
             <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
         </ul>
     </nav>
@@ -698,9 +585,14 @@
         <source src="Overture.m4a" type="audio/mp4">
     </audio>
 
-    <!-- Audio Controller Button -->
-    <button id="audio-controller" onclick="toggleAudio()" title="Toggle music">
-        <span id="audio-icon">&#9835;</span>
+    <!-- Floating Mute Button -->
+    <button id="mute-btn" onclick="toggleMute()" title="Toggle sound">
+        <svg id="sound-on-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+        </svg>
+        <svg id="sound-off-icon" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+            <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+        </svg>
     </button>
 
     <!-- Hero Section -->
@@ -708,7 +600,7 @@
         <div class="hero-content">
             <img src="Benjamin T. Rossen Photo.JPG" alt="Benjamin T. Rossen" class="hero-image">
             <h1>Benjamin T. Rossen</h1>
-            <p class="hero-subtitle">Pianist &bull; Composer &bull; Conductor &bull; Artistic Leader</p>
+            <p class="hero-subtitle">Pianist / Composer / Conductor / Artistic Leader</p>
         </div>
         <div class="scroll-indicator">
             <span></span>
@@ -718,179 +610,187 @@
     <!-- About Section -->
     <section class="about" id="about">
         <h2 class="section-title">About</h2>
-        <p class="section-subtitle">A multifaceted artist dedicated to the future of live performing arts</p>
 
         <div class="about-content">
             <div class="about-text">
-                <p>Native New Yorker <strong>Benjamin T. Rossen</strong> is a pianist, composer, conductor, and fervent leader in live performing arts. He is on the teaching staff at Harvard University's Music Department and the former Executive Director of Lowell House Opera (LHO), the oldest performing opera company in New England.</p>
+                <p>Native New Yorker <strong>Benjamin T. Rossen</strong> is a pianist, composer, conductor, and fervent leader in live performing arts. He is on the teaching staff at Harvard University's Music Department and the former Executive Director of Lowell House Opera (LHO), the oldest performing opera company in New England. Benjamin oversaw LHO's transformation through its largest multi-year fundraising campaign and four theatrical productions, including the 2024 world premiere of his original work <em>The Unknowable: An Operatic Ballet in Two Acts</em>. He was the music director and conductor of LHO's 2025 production of <em>Postcard from Morocco</em> by Dominick Argento.</p>
 
-                <p>Benjamin oversaw LHO's transformation through its largest multi-year fundraising campaign and four theatrical productions, including the 2024 world premiere of his original work <em>The Unknowable: An Operatic Ballet in Two Acts</em>. He was the music director and conductor of LHO's 2025 production of <em>Postcard from Morocco</em> by Dominick Argento.</p>
+                <p>Benjamin earned a Master of Music in Piano Performance from the New England Conservatory and a Bachelor of Arts in Economics and Music from Harvard University, graduating through the Harvard/NEC Dual Degree Program. He graduated from Harvard in three years.</p>
 
-                <p>He earned a Master of Music in Piano Performance from the New England Conservatory and a Bachelor of Arts in Economics and Music from Harvard University, graduating through the Harvard/NEC Dual Degree Program. He graduated from Harvard in three years.</p>
-            </div>
+                <p>At Harvard, Benjamin founded and directed the Harvard Ballet Orchestra, and served as Music Director of Harvard College Opera (HCO). His original overture for the HCO production of <em>The Merry Widow</em> by Franz Lehar received the 2023 Hugh F. MacColl Prize from the Harvard Music Department.</p>
 
-            <div class="about-highlight">
-                <h3>Education & Recognition</h3>
-                <div class="credentials">
-                    <span class="credential-tag">Young Steinway Artist</span>
-                    <span class="credential-tag">2020 U.S. Presidential Scholar in the Arts</span>
-                    <span class="credential-tag">Harvard University</span>
-                    <span class="credential-tag">New England Conservatory</span>
-                    <span class="credential-tag">2018 YoungArts Finalist-Winner</span>
-                </div>
+                <p>As a pianist, Benjamin made his recital debut at age nine and concerto debut at Carnegie Hall at age ten. He has appeared as a guest artist with the Chamber Music Society of Lincoln Center, The Cliburn, and Music@Menlo. He was named a 2018 Finalist-Winner by the National YoungArts Foundation and a quarterfinalist at the 2019 Cliburn International Junior Piano Competition.</p>
+
+                <p>He has studied piano with Alessio Bax, Dang Thai Son, and Jeffrey Cohen. Benjamin is a 2020 U.S. Presidential Scholar in the Arts and a Young Steinway Artist.</p>
             </div>
         </div>
     </section>
 
-    <!-- Roles Section -->
-    <section class="roles" id="roles">
-        <h2 class="section-title">Artistry</h2>
-        <p class="section-subtitle">Four dimensions of musical expression and leadership</p>
-
-        <div class="roles-grid">
-            <div class="role-card">
-                <div class="role-icon">&#127929;</div>
-                <h3>Pianist</h3>
-                <p>Made his recital debut at age nine and concerto debut at Carnegie Hall at age ten. Has appeared as a guest artist with the Chamber Music Society of Lincoln Center, The Cliburn, and Music@Menlo. Quarterfinalist at the 2019 Cliburn International Junior Piano Competition.</p>
-            </div>
-
-            <div class="role-card">
-                <div class="role-icon">&#9834;</div>
-                <h3>Composer</h3>
-                <p>Creator of <em>The Unknowable: An Operatic Ballet in Two Acts</em>, which received its world premiere in 2024. His original overture for <em>The Merry Widow</em> won the 2023 Hugh F. MacColl Prize from the Harvard Music Department.</p>
-            </div>
-
-            <div class="role-card">
-                <div class="role-icon">&#127932;</div>
-                <h3>Conductor</h3>
-                <p>Music director and conductor of Lowell House Opera's 2025 production of <em>Postcard from Morocco</em>. Founded and directed the Harvard Ballet Orchestra, and served as Music Director of Harvard College Opera.</p>
-            </div>
-
-            <div class="role-card">
-                <div class="role-icon">&#10024;</div>
-                <h3>Artistic Leader</h3>
-                <p>Former Executive Director of Lowell House Opera, the oldest performing opera company in New England. Led the company through its largest multi-year fundraising campaign and four theatrical productions. Currently on the teaching staff at Harvard University's Music Department.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Media Section -->
-    <section class="media" id="media">
+    <!-- Performances Section -->
+    <section class="performances" id="performances">
         <h2 class="section-title">Performances</h2>
         <p class="section-subtitle">Watch Benjamin's artistry come to life</p>
 
-        <!-- Featured Performance -->
-        <div class="featured-performance">
-            <p class="featured-label">Featured Performance</p>
-            <div class="video-wrapper">
-                <iframe
-                    src="https://www.youtube.com/embed/videoseries?list=UU_PqxTEqECxM3YJxGYR6LYw"
-                    title="Benjamin T. Rossen - Featured Performance"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-            </div>
+        <!-- Filter Controls -->
+        <div class="filter-controls">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="solo">Solo</button>
+            <button class="filter-btn" data-filter="chamber">Chamber Music</button>
+            <button class="filter-btn" data-filter="film">Film Score</button>
+            <button class="filter-btn" data-filter="composition">Composition</button>
         </div>
 
+        <!-- Video Grid -->
         <div class="video-grid">
-            <div class="video-card">
+            <!-- Solo Performances -->
+            <div class="video-card" data-category="solo">
                 <div class="video-wrapper">
                     <iframe
-                        src="https://www.youtube.com/embed/?listType=user_uploads&list=benjamin.t.rossen"
-                        title="Benjamin T. Rossen Performances"
+                        src="https://www.youtube.com/embed/VIDEO_ID_1"
+                        title="Chopin Ballade No. 1"
                         frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen>
                     </iframe>
                 </div>
                 <div class="video-info">
-                    <h4>Piano Performances</h4>
-                    <p>Solo and chamber music performances</p>
+                    <h4>Chopin Ballade No. 1 in G minor, Op. 23</h4>
+                    <p>Solo piano performance</p>
+                    <span class="video-category">Solo</span>
                 </div>
             </div>
 
-            <div class="video-card">
+            <div class="video-card" data-category="solo">
                 <div class="video-wrapper">
                     <iframe
-                        src="https://www.youtube.com/embed/videoseries?list=UU_PqxTEqECxM3YJxGYR6LYw"
-                        title="Recent Uploads"
+                        src="https://www.youtube.com/embed/VIDEO_ID_2"
+                        title="Chopin Polonaise"
                         frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen>
                     </iframe>
                 </div>
                 <div class="video-info">
-                    <h4>Latest Uploads</h4>
-                    <p>Recent performances and projects</p>
+                    <h4>Chopin Polonaise in A-flat Major, Op. 53</h4>
+                    <p>Solo piano performance</p>
+                    <span class="video-category">Solo</span>
+                </div>
+            </div>
+
+            <div class="video-card" data-category="solo">
+                <div class="video-wrapper">
+                    <iframe
+                        src="https://www.youtube.com/embed/VIDEO_ID_3"
+                        title="Liszt Piano Performance"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="video-info">
+                    <h4>Liszt Consolation No. 3</h4>
+                    <p>Solo piano performance</p>
+                    <span class="video-category">Solo</span>
+                </div>
+            </div>
+
+            <!-- Chamber Music -->
+            <div class="video-card" data-category="chamber">
+                <div class="video-wrapper">
+                    <iframe
+                        src="https://www.youtube.com/embed/VIDEO_ID_4"
+                        title="Chamber Music Performance"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="video-info">
+                    <h4>Brahms Piano Trio</h4>
+                    <p>Chamber Music Society of Lincoln Center</p>
+                    <span class="video-category">Chamber Music</span>
+                </div>
+            </div>
+
+            <div class="video-card" data-category="chamber">
+                <div class="video-wrapper">
+                    <iframe
+                        src="https://www.youtube.com/embed/VIDEO_ID_5"
+                        title="Mendelssohn Performance"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="video-info">
+                    <h4>Mendelssohn Piano Quartet</h4>
+                    <p>Music@Menlo</p>
+                    <span class="video-category">Chamber Music</span>
+                </div>
+            </div>
+
+            <!-- Film Score -->
+            <div class="video-card" data-category="film">
+                <div class="video-wrapper">
+                    <iframe
+                        src="https://www.youtube.com/embed/VIDEO_ID_6"
+                        title="Film Score"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="video-info">
+                    <h4>Original Film Score</h4>
+                    <p>Composed and performed by Benjamin</p>
+                    <span class="video-category">Film Score</span>
+                </div>
+            </div>
+
+            <!-- Composition -->
+            <div class="video-card" data-category="composition">
+                <div class="video-wrapper">
+                    <iframe
+                        src="https://www.youtube.com/embed/VIDEO_ID_7"
+                        title="The Unknowable"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="video-info">
+                    <h4>The Unknowable: An Operatic Ballet</h4>
+                    <p>World Premiere - Original composition</p>
+                    <span class="video-category">Composition</span>
+                </div>
+            </div>
+
+            <div class="video-card" data-category="composition">
+                <div class="video-wrapper">
+                    <iframe
+                        src="https://www.youtube.com/embed/VIDEO_ID_8"
+                        title="Overture - The Merry Widow"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="video-info">
+                    <h4>Overture for The Merry Widow</h4>
+                    <p>Hugh F. MacColl Prize Winner</p>
+                    <span class="video-category">Composition</span>
                 </div>
             </div>
         </div>
 
         <!-- YouTube Channel Link -->
-        <div style="text-align: center; margin-top: 3rem;">
-            <a href="https://www.youtube.com/@benjamin.t.rossen" target="_blank" class="contact-link" style="display: inline-flex; color: var(--text-dark); border-color: var(--primary-blue);">
+        <div class="channel-link-container">
+            <a href="https://www.youtube.com/@benjamin.t.rossen" target="_blank" class="channel-link">
                 <svg viewBox="0 0 24 24" fill="currentColor">
                     <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                 </svg>
                 View All Performances on YouTube
             </a>
-        </div>
-    </section>
-
-    <!-- Audio Player Section -->
-    <section class="audio-section" id="listen">
-        <h2 class="section-title">Listen</h2>
-        <p class="section-subtitle">Original composition by Benjamin T. Rossen</p>
-
-        <div class="audio-player-container">
-            <h3 class="audio-title">Overture</h3>
-            <audio controls class="audio-player">
-                <source src="Overture.m4a" type="audio/mp4">
-                Your browser does not support the audio element.
-            </audio>
-            <p class="audio-note">From <em>The Unknowable: An Operatic Ballet in Two Acts</em></p>
-        </div>
-    </section>
-
-    <!-- Achievements Section -->
-    <section class="achievements" id="achievements">
-        <h2 class="section-title">Achievements</h2>
-        <p class="section-subtitle">A journey of excellence and dedication</p>
-
-        <div class="achievements-list">
-            <div class="achievement-item">
-                <span class="achievement-icon">&#127942;</span>
-                <p class="achievement-text"><strong>Carnegie Hall Debut</strong> at age ten with the New York Concerti Sinfonietta</p>
-            </div>
-            <div class="achievement-item">
-                <span class="achievement-icon">&#127941;</span>
-                <p class="achievement-text"><strong>2020 U.S. Presidential Scholar in the Arts</strong> - one of the nation's highest honors for high school students</p>
-            </div>
-            <div class="achievement-item">
-                <span class="achievement-icon">&#127929;</span>
-                <p class="achievement-text"><strong>Young Steinway Artist</strong> - recognized by Steinway & Sons</p>
-            </div>
-            <div class="achievement-item">
-                <span class="achievement-icon">&#127894;</span>
-                <p class="achievement-text"><strong>2023 Hugh F. MacColl Prize</strong> from Harvard Music Department for original overture</p>
-            </div>
-            <div class="achievement-item">
-                <span class="achievement-icon">&#127928;</span>
-                <p class="achievement-text"><strong>Chamber Music Society of Lincoln Center</strong> guest artist</p>
-            </div>
-            <div class="achievement-item">
-                <span class="achievement-icon">&#127895;</span>
-                <p class="achievement-text"><strong>2019 Cliburn International Junior Piano Competition</strong> quarterfinalist</p>
-            </div>
-            <div class="achievement-item">
-                <span class="achievement-icon">&#9733;</span>
-                <p class="achievement-text"><strong>2018 YoungArts Foundation</strong> Finalist-Winner</p>
-            </div>
-            <div class="achievement-item">
-                <span class="achievement-icon">&#127979;</span>
-                <p class="achievement-text"><strong>Harvard/NEC Dual Degree</strong> - graduated from Harvard in three years</p>
-            </div>
         </div>
     </section>
 
@@ -924,7 +824,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Benjamin T. Rossen. All rights reserved.</p>
+        <p>2025 Benjamin T. Rossen. All rights reserved.</p>
     </footer>
 
     <script>
@@ -947,46 +847,92 @@
             document.querySelector('.nav-links').classList.remove('active');
         }
 
-        // Audio control
+        // Audio control - Auto-play on page load
         const audio = document.getElementById('background-audio');
-        const audioController = document.getElementById('audio-controller');
-        const audioIcon = document.getElementById('audio-icon');
-        let isPlaying = false;
-        let hasStarted = false;
+        const muteBtn = document.getElementById('mute-btn');
+        const soundOnIcon = document.getElementById('sound-on-icon');
+        const soundOffIcon = document.getElementById('sound-off-icon');
+        let isMuted = false;
 
-        function toggleAudio() {
-            if (isPlaying) {
-                audio.pause();
-                audioController.classList.remove('playing');
-                audioIcon.innerHTML = '&#9835;';
-                isPlaying = false;
-            } else {
+        // Try to auto-play audio on page load
+        window.addEventListener('load', () => {
+            audio.volume = 0.3;
+            audio.play().then(() => {
+                // Audio started successfully
+                updateMuteIcon();
+            }).catch(e => {
+                // Auto-play was blocked, show muted state
+                isMuted = true;
+                updateMuteIcon();
+                console.log('Auto-play blocked by browser. Click the sound button to enable audio.');
+            });
+        });
+
+        // Also try on first user interaction
+        document.addEventListener('click', function initAudio() {
+            if (audio.paused) {
                 audio.play().then(() => {
-                    audioController.classList.add('playing');
-                    audioIcon.innerHTML = '&#10074;&#10074;';
-                    isPlaying = true;
-                    hasStarted = true;
+                    isMuted = false;
+                    updateMuteIcon();
                 }).catch(e => {
                     console.log('Audio play failed:', e);
                 });
             }
+            document.removeEventListener('click', initAudio);
+        }, { once: true });
+
+        function toggleMute() {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    isMuted = false;
+                    updateMuteIcon();
+                }).catch(e => {
+                    console.log('Audio play failed:', e);
+                });
+            } else {
+                if (isMuted) {
+                    audio.muted = false;
+                    isMuted = false;
+                } else {
+                    audio.muted = true;
+                    isMuted = true;
+                }
+                updateMuteIcon();
+            }
         }
 
-        // Start audio on first scroll
-        let scrollStarted = false;
-        window.addEventListener('scroll', () => {
-            if (!scrollStarted && !hasStarted && window.scrollY > 100) {
-                scrollStarted = true;
-                audio.volume = 0.3;
-                audio.play().then(() => {
-                    audioController.classList.add('playing');
-                    audioIcon.innerHTML = '&#10074;&#10074;';
-                    isPlaying = true;
-                    hasStarted = true;
-                }).catch(e => {
-                    console.log('Auto-play blocked:', e);
-                });
+        function updateMuteIcon() {
+            if (isMuted || audio.paused) {
+                soundOnIcon.style.display = 'none';
+                soundOffIcon.style.display = 'block';
+            } else {
+                soundOnIcon.style.display = 'block';
+                soundOffIcon.style.display = 'none';
             }
+        }
+
+        // Video filtering
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const videoCards = document.querySelectorAll('.video-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Filter videos
+                const filter = btn.dataset.filter;
+
+                videoCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.classList.remove('hidden');
+                        card.style.animation = 'fadeInUp 0.5s ease forwards';
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
         });
 
         // Smooth scroll for navigation links
@@ -1019,7 +965,7 @@
         }, observerOptions);
 
         // Observe elements for animation
-        document.querySelectorAll('.role-card, .video-card, .achievement-item').forEach(el => {
+        document.querySelectorAll('.video-card').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
