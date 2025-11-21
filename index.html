@@ -1021,7 +1021,7 @@
             // Only apply parallax when the About section is in view
             if (scrolled > aboutOffset - window.innerHeight && scrolled < aboutOffset + aboutHeight) {
                 const relativeScroll = scrolled - aboutOffset + window.innerHeight;
-                const parallaxAmount = relativeScroll * 0.3;
+                const parallaxAmount = relativeScroll * -0.3;
                 aboutSection.style.backgroundPosition = `center calc(25% + ${parallaxAmount}px)`;
             }
         });
