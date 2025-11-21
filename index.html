@@ -111,6 +111,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            background-image: url('IMG_1640.JPG');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
         .parallax-bg {
@@ -126,7 +130,7 @@
 
         #parallax-bg-1 {
             background-image: url('Benjamin T. Rossen Horizontal.png');
-            opacity: 1;
+            opacity: 0;
         }
 
         #parallax-bg-2 {
@@ -140,7 +144,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(239, 232, 226, 0.3), rgba(239, 232, 226, 0.7));
+            background: radial-gradient(circle at center, rgba(239, 232, 226, 0.5), rgba(239, 232, 226, 0.85));
             z-index: 1;
         }
 
@@ -149,6 +153,10 @@
             z-index: 2;
             text-align: center;
             color: var(--charcoal);
+            background: rgba(239, 232, 226, 0.7);
+            padding: 3rem 4rem;
+            border-radius: 4px;
+            backdrop-filter: blur(10px);
         }
 
         .parallax-content h1 {
@@ -163,7 +171,7 @@
             font-size: 0.75rem;
             letter-spacing: 0.3em;
             text-transform: uppercase;
-            opacity: 0.7;
+            opacity: 0.8;
         }
 
         .scroll-indicator {
@@ -216,7 +224,7 @@
         .about {
             background-image: url('Benjamin Speaking.PNG');
             background-size: cover;
-            background-position: top;
+            background-position: center 25%;
             background-attachment: fixed;
             position: relative;
         }
@@ -542,9 +550,9 @@
             pointer-events: none;
             transition: opacity 0.3s ease;
             z-index: 1001;
-            max-width: 200px;
+            max-width: 230px;
             text-align: center;
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         .audio-tooltip.show {
@@ -605,6 +613,10 @@
 
             .menu-toggle {
                 display: flex;
+            }
+
+            .parallax-content {
+                padding: 2rem 1.5rem;
             }
 
             section {
