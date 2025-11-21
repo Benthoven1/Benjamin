@@ -378,14 +378,25 @@
             color: var(--cream);
         }
 
-        /* Video Grid */
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        /* Video Carousel */
+        .carousel-container {
+            position: relative;
+            padding: 0 4rem;
+        }
+
+        .video-carousel {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
             gap: 2rem;
         }
 
         .video-card {
+            flex: 0 0 calc(33.333% - 1.35rem);
             background: var(--cream);
             transition: all 0.3s ease;
         }
@@ -426,6 +437,73 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             opacity: 0.7;
+        }
+
+        /* Carousel Navigation */
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--charcoal);
+            color: var(--cream);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-nav:hover {
+            transform: translateY(-50%) scale(1.1);
+            opacity: 0.9;
+        }
+
+        .carousel-nav.prev {
+            left: 0;
+        }
+
+        .carousel-nav.next {
+            right: 0;
+        }
+
+        .carousel-nav:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .carousel-nav:disabled:hover {
+            transform: translateY(-50%);
+        }
+
+        /* Carousel Pagination */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--charcoal);
+            opacity: 0.3;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            padding: 0;
+        }
+
+        .carousel-dot.active {
+            opacity: 1;
+            width: 24px;
+            border-radius: 4px;
         }
 
         /* YouTube Channel Link */
@@ -676,8 +754,17 @@
                 padding: 4rem 5%;
             }
 
-            .video-grid {
-                grid-template-columns: 1fr;
+            .video-card {
+                flex: 0 0 100%;
+            }
+
+            .carousel-container {
+                padding: 0 3rem;
+            }
+
+            .carousel-nav {
+                width: 36px;
+                height: 36px;
             }
 
             .filter-controls {
@@ -835,8 +922,20 @@
                 <button class="filter-btn" data-filter="composition">Composition</button>
             </div>
 
-            <!-- Video Grid -->
-            <div class="video-grid">
+            <!-- Video Carousel -->
+            <div class="carousel-container">
+                <button class="carousel-nav prev" id="carousel-prev" aria-label="Previous">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                </button>
+                <button class="carousel-nav next" id="carousel-next" aria-label="Next">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                    </svg>
+                </button>
+                <div class="video-carousel">
+                    <div class="carousel-track" id="carousel-track">
                 <!-- Solo -->
                 <div class="video-card fade-in" data-category="solo">
                     <div class="video-wrapper">
@@ -856,6 +955,34 @@
                     <div class="video-wrapper">
                         <iframe
                             src="https://www.youtube.com/embed/o8gQ_FEYh8I"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Solo</span>
+                    </div>
+                </div>
+
+                <div class="video-card fade-in" data-category="solo">
+                    <div class="video-wrapper">
+                        <iframe
+                            src="https://www.youtube.com/embed/uEIcwlCJf2M"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Solo</span>
+                    </div>
+                </div>
+
+                <div class="video-card fade-in" data-category="solo">
+                    <div class="video-wrapper">
+                        <iframe
+                            src="https://www.youtube.com/embed/VZP8sCSpryA"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen>
@@ -941,6 +1068,20 @@
                     <div class="video-wrapper">
                         <iframe
                             src="https://www.youtube.com/embed/mg6PLTsxUc4"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Chamber</span>
+                    </div>
+                </div>
+
+                <div class="video-card fade-in" data-category="chamber">
+                    <div class="video-wrapper">
+                        <iframe
+                            src="https://www.youtube.com/embed/dlQ13QUpKmI"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen>
@@ -1064,6 +1205,9 @@
                         <span class="video-category">Composition</span>
                     </div>
                 </div>
+                    </div>
+                </div>
+                <div class="carousel-dots" id="carousel-dots"></div>
             </div>
 
             <!-- YouTube Channel Link -->
@@ -1302,26 +1446,109 @@
             }
         }
 
-        // Video filtering
+        // Video Carousel
         const filterBtns = document.querySelectorAll('.filter-btn');
         const videoCards = document.querySelectorAll('.video-card');
+        const carouselTrack = document.getElementById('carousel-track');
+        const carouselPrev = document.getElementById('carousel-prev');
+        const carouselNext = document.getElementById('carousel-next');
+        const carouselDots = document.getElementById('carousel-dots');
+        let currentIndex = 0;
+        let visibleCards = [];
+        let cardsPerView = 3;
 
+        // Set cards per view based on screen size
+        function updateCardsPerView() {
+            if (window.innerWidth <= 768) {
+                cardsPerView = 1;
+            } else {
+                cardsPerView = 3;
+            }
+        }
+
+        updateCardsPerView();
+        window.addEventListener('resize', () => {
+            updateCardsPerView();
+            updateCarousel();
+        });
+
+        // Filter and update carousel
+        function filterVideos(filter) {
+            visibleCards = Array.from(videoCards).filter(card => {
+                const match = filter === 'all' || card.dataset.category === filter;
+                if (match) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+                return match;
+            });
+            currentIndex = 0;
+            updateCarousel();
+            createDots();
+        }
+
+        // Update carousel position
+        function updateCarousel() {
+            const cardWidth = visibleCards.length > 0 ? visibleCards[0].offsetWidth : 0;
+            const gap = 32; // 2rem in pixels
+            const offset = -(currentIndex * (cardWidth + gap));
+            carouselTrack.style.transform = `translateX(${offset}px)`;
+
+            // Update button states
+            carouselPrev.disabled = currentIndex === 0;
+            carouselNext.disabled = currentIndex >= visibleCards.length - cardsPerView;
+
+            // Update dots
+            document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        // Create pagination dots
+        function createDots() {
+            carouselDots.innerHTML = '';
+            const totalPages = Math.max(1, visibleCards.length - cardsPerView + 1);
+
+            for (let i = 0; i < totalPages; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'carousel-dot';
+                dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+                if (i === currentIndex) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    currentIndex = i;
+                    updateCarousel();
+                });
+                carouselDots.appendChild(dot);
+            }
+        }
+
+        // Navigation
+        carouselPrev.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+
+        carouselNext.addEventListener('click', () => {
+            if (currentIndex < visibleCards.length - cardsPerView) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+
+        // Filter functionality
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-
-                const filter = btn.dataset.filter;
-
-                videoCards.forEach(card => {
-                    if (filter === 'all' || card.dataset.category === filter) {
-                        card.classList.remove('hidden');
-                    } else {
-                        card.classList.add('hidden');
-                    }
-                });
+                filterVideos(btn.dataset.filter);
             });
         });
+
+        // Initialize carousel
+        filterVideos('all');
 
         // Smooth scroll for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
