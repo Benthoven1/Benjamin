@@ -78,11 +78,14 @@
         }
 
         .nav-center .letter:hover {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
-            -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            -webkit-background-clip: text;
             transform: translateY(-2px);
+        }
+
+        .nav-center .letter[data-rainbow-color]:hover {
+            background: var(--rainbow-color);
         }
 
         .nav-links {
@@ -1284,11 +1287,19 @@
             const navCenter = document.querySelector('.nav-center');
             if (navCenter) {
                 const text = navCenter.textContent;
-                navCenter.innerHTML = text.split('').map(char => {
-                    if (char === ' ') {
-                        return '<span class="letter" style="display: inline; cursor: default;">&nbsp;</span>';
+                const chars = text.split('');
+                const totalChars = chars.length;
+
+                navCenter.innerHTML = chars.map((char, index) => {
+                    if (char === ' ' || char === '.') {
+                        return `<span class="letter" style="display: inline; cursor: default;">${char === ' ' ? '&nbsp;' : char}</span>`;
                     }
-                    return `<span class="letter">${char}</span>`;
+
+                    // Calculate rainbow color: Red (0°) to Purple (270°)
+                    const hue = (index / (totalChars - 1)) * 270;
+                    const color = `hsl(${hue}, 70%, 55%)`;
+
+                    return `<span class="letter" data-rainbow-color style="--rainbow-color: ${color}">${char}</span>`;
                 }).join('');
             }
         });
