@@ -270,7 +270,7 @@
         .about {
             background-image: url('Benjamin Speaking.PNG');
             background-size: cover;
-            background-position: center 75%;
+            background-position: center 50%;
             background-attachment: fixed;
             position: relative;
         }
@@ -631,6 +631,12 @@
             .about-image {
                 max-width: 400px;
                 margin: 0 auto;
+            }
+
+            .about {
+                background-size: auto 100%;
+                background-attachment: scroll;
+                background-position: center 50%;
             }
         }
 
@@ -1035,7 +1041,7 @@
             if (scrolled > aboutOffset - window.innerHeight && scrolled < aboutOffset + aboutHeight) {
                 const relativeScroll = scrolled - aboutOffset + window.innerHeight;
                 const parallaxAmount = relativeScroll * -0.3;
-                aboutSection.style.backgroundPosition = `center calc(75% + ${parallaxAmount}px)`;
+                aboutSection.style.backgroundPosition = `center calc(50% + ${parallaxAmount}px)`;
             }
         });
 
