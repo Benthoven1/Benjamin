@@ -1280,69 +1280,97 @@
     </footer>
 
     <script>
-        // Web Audio API for piano notes
+        // Web Audio API for piano notes - completely independent from background audio
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        let audioContextResumed = false;
+
+        // Resume audio context on first user interaction
+        function resumeAudioContext() {
+            if (!audioContextResumed && audioContext.state === 'suspended') {
+                audioContext.resume().then(() => {
+                    audioContextResumed = true;
+                });
+            }
+        }
+
+        // Add listeners to resume audio context
+        document.addEventListener('click', resumeAudioContext, { once: true });
+        document.addEventListener('touchstart', resumeAudioContext, { once: true });
 
         function playPianoNote(midiNote) {
+            // Ensure audio context is running
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+
             // Convert MIDI note to frequency
             const frequency = 440 * Math.pow(2, (midiNote - 69) / 12);
+            const now = audioContext.currentTime;
 
-            // Create master gain node (volume reduced by 25%: 0.3 * 0.75 = 0.225)
+            // Create master gain node (volume reduced by 25%)
             const masterGain = audioContext.createGain();
             masterGain.connect(audioContext.destination);
+            masterGain.gain.setValueAtTime(0.18, now); // Reduced from 0.24
 
-            // Piano sound with harmonics - fundamental frequency
-            const fundamental = audioContext.createOscillator();
-            const fundamentalGain = audioContext.createGain();
-            fundamental.type = 'triangle';
-            fundamental.frequency.setValueAtTime(frequency, audioContext.currentTime);
-            fundamental.connect(fundamentalGain);
-            fundamentalGain.connect(masterGain);
+            // Attack noise for hammer strike
+            const noiseBuffer = audioContext.createBuffer(1, audioContext.sampleRate * 0.05, audioContext.sampleRate);
+            const noiseData = noiseBuffer.getChannelData(0);
+            for (let i = 0; i < noiseData.length; i++) {
+                noiseData[i] = (Math.random() * 2 - 1) * 0.15;
+            }
+            const noiseSource = audioContext.createBufferSource();
+            noiseSource.buffer = noiseBuffer;
+            const noiseFilter = audioContext.createBiquadFilter();
+            noiseFilter.type = 'bandpass';
+            noiseFilter.frequency.value = frequency * 4;
+            noiseFilter.Q.value = 5;
+            const noiseGain = audioContext.createGain();
+            noiseGain.gain.setValueAtTime(0.08, now);
+            noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.03);
+            noiseSource.connect(noiseFilter);
+            noiseFilter.connect(noiseGain);
+            noiseGain.connect(masterGain);
+            noiseSource.start(now);
+            noiseSource.stop(now + 0.05);
 
-            // Second harmonic (octave above)
-            const harmonic2 = audioContext.createOscillator();
-            const harmonic2Gain = audioContext.createGain();
-            harmonic2.type = 'sine';
-            harmonic2.frequency.setValueAtTime(frequency * 2, audioContext.currentTime);
-            harmonic2.connect(harmonic2Gain);
-            harmonic2Gain.connect(masterGain);
+            // Piano harmonics with proper ratios and envelope
+            const harmonics = [
+                { ratio: 1, gain: 1.0, type: 'triangle' },      // Fundamental
+                { ratio: 2, gain: 0.5, type: 'sine' },          // Octave
+                { ratio: 3, gain: 0.3, type: 'sine' },          // Perfect fifth
+                { ratio: 4, gain: 0.25, type: 'sine' },         // Two octaves
+                { ratio: 5, gain: 0.15, type: 'sine' },         // Major third
+                { ratio: 6, gain: 0.12, type: 'sine' },         // Perfect fifth + octave
+                { ratio: 7, gain: 0.08, type: 'sine' },         // Minor seventh
+                { ratio: 8, gain: 0.06, type: 'sine' }          // Three octaves
+            ];
 
-            // Third harmonic
-            const harmonic3 = audioContext.createOscillator();
-            const harmonic3Gain = audioContext.createGain();
-            harmonic3.type = 'sine';
-            harmonic3.frequency.setValueAtTime(frequency * 3, audioContext.currentTime);
-            harmonic3.connect(harmonic3Gain);
-            harmonic3Gain.connect(masterGain);
-
-            // Piano envelope - sharp attack, medium decay
-            const now = audioContext.currentTime;
             const attackTime = 0.002;
-            const decayTime = 0.8;
+            const decayTime = 0.15;
+            const sustainLevel = 0.4;
+            const releaseTime = 1.2;
 
-            // Fundamental envelope
-            fundamentalGain.gain.setValueAtTime(0, now);
-            fundamentalGain.gain.linearRampToValueAtTime(0.225, now + attackTime);
-            fundamentalGain.gain.exponentialRampToValueAtTime(0.001, now + decayTime);
+            harmonics.forEach((harmonic, index) => {
+                const osc = audioContext.createOscillator();
+                const oscGain = audioContext.createGain();
 
-            // Harmonic 2 envelope (softer)
-            harmonic2Gain.gain.setValueAtTime(0, now);
-            harmonic2Gain.gain.linearRampToValueAtTime(0.1, now + attackTime);
-            harmonic2Gain.gain.exponentialRampToValueAtTime(0.001, now + decayTime);
+                osc.type = harmonic.type;
+                osc.frequency.setValueAtTime(frequency * harmonic.ratio, now);
+                osc.connect(oscGain);
+                oscGain.connect(masterGain);
 
-            // Harmonic 3 envelope (even softer)
-            harmonic3Gain.gain.setValueAtTime(0, now);
-            harmonic3Gain.gain.linearRampToValueAtTime(0.05, now + attackTime);
-            harmonic3Gain.gain.exponentialRampToValueAtTime(0.001, now + decayTime);
+                // ADSR envelope
+                const peakGain = harmonic.gain * 0.18;
+                const sustainGain = peakGain * sustainLevel;
 
-            // Start and stop all oscillators
-            fundamental.start(now);
-            harmonic2.start(now);
-            harmonic3.start(now);
+                oscGain.gain.setValueAtTime(0, now);
+                oscGain.gain.linearRampToValueAtTime(peakGain, now + attackTime);
+                oscGain.gain.exponentialRampToValueAtTime(sustainGain, now + attackTime + decayTime);
+                oscGain.gain.exponentialRampToValueAtTime(0.001, now + releaseTime);
 
-            fundamental.stop(now + decayTime);
-            harmonic2.stop(now + decayTime);
-            harmonic3.stop(now + decayTime);
+                osc.start(now);
+                osc.stop(now + releaseTime);
+            });
         }
 
         // Wrap each letter in nav-center with a span for individual hover effects
