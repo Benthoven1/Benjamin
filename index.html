@@ -203,6 +203,21 @@
             opacity: 0.5;
         }
 
+        /* Rainbow animation for The Unknowable */
+        .unknowable-link {
+            animation: rainbowPhase 6s linear infinite;
+        }
+
+        @keyframes rainbowPhase {
+            0% { color: #ff0000; } /* Red */
+            16.66% { color: #ff7f00; } /* Orange */
+            33.33% { color: #ffff00; } /* Yellow */
+            50% { color: #00ff00; } /* Green */
+            66.66% { color: #0000ff; } /* Blue */
+            83.33% { color: #8b00ff; } /* Violet */
+            100% { color: #ff0000; } /* Back to Red */
+        }
+
         /* Mobile Menu */
         .menu-toggle {
             display: none;
@@ -427,7 +442,7 @@
             font-size: 1.2rem;
             line-height: 1.9;
             color: var(--charcoal-light);
-            font-weight: 300;
+            font-weight: 400;
         }
 
         .about-text p {
@@ -478,7 +493,7 @@
             color: var(--charcoal);
             font-family: 'Inter', sans-serif;
             font-size: 0.7rem;
-            font-weight: 400;
+            font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             cursor: pointer;
@@ -489,6 +504,36 @@
         .filter-btn.active {
             background: var(--charcoal);
             color: var(--cream);
+        }
+
+        /* Video Grid Container with Scroll */
+        .video-grid-container {
+            max-height: 600px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 1rem;
+            border: 1px solid rgba(21, 21, 22, 0.1);
+            border-radius: 8px;
+            background: var(--cream);
+        }
+
+        /* Scrollbar styling */
+        .video-grid-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .video-grid-container::-webkit-scrollbar-track {
+            background: rgba(21, 21, 22, 0.05);
+            border-radius: 4px;
+        }
+
+        .video-grid-container::-webkit-scrollbar-thumb {
+            background: rgba(21, 21, 22, 0.2);
+            border-radius: 4px;
+        }
+
+        .video-grid-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(21, 21, 22, 0.3);
         }
 
         /* Video Grid */
@@ -1174,7 +1219,7 @@
             <li><a href="#performances" onclick="closeMenu()">Performances</a></li>
             <li><a href="#brainteasers" onclick="closeMenu()">Brainteasers</a></li>
             <li><a href="#connect" onclick="closeMenu()">Connect</a></li>
-            <li><a href="https://neoguer.github.io/Unknowable/">The Unknowable</a></li>
+            <li><a href="https://neoguer.github.io/Unknowable/" class="unknowable-link">The Unknowable</a></li>
         </ul>
     </nav>
 
@@ -1272,7 +1317,8 @@
             </div>
 
             <!-- Video Grid -->
-            <div class="video-grid">
+            <div class="video-grid-container">
+                <div class="video-grid">
                 <!-- Solo -->
                 <div class="video-card fade-in" data-category="solo">
                     <div class="video-wrapper">
@@ -1556,6 +1602,7 @@
                         <span class="video-category">Composition</span>
                     </div>
                 </div>
+                </div>
             </div>
 
             <!-- YouTube Channel Link -->
@@ -1646,6 +1693,7 @@
                         <option value="Piano Teaching">Piano Teaching</option>
                         <option value="Accompaniment">Accompaniment</option>
                         <option value="Commission/Transcription">Commission/Transcription</option>
+                        <option value="Other">Other</option>
                     </select>
                 </div>
 
@@ -1932,6 +1980,11 @@
         const parallaxBg2 = document.getElementById('parallax-bg-2');
         const aboutSection = document.querySelector('.about');
 
+        // Function to check if in mobile mode
+        function isMobileMode() {
+            return window.innerWidth <= 768;
+        }
+
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
 
@@ -1945,7 +1998,11 @@
             // Only apply parallax when the About section is in view
             if (scrolled > aboutOffset - window.innerHeight && scrolled < aboutOffset + aboutHeight) {
                 const relativeScroll = scrolled - aboutOffset + window.innerHeight;
-                const parallaxAmount = relativeScroll * -0.3;
+
+                // Use minimal parallax speed in mobile mode (~0%), normal speed in desktop
+                const parallaxSpeed = isMobileMode() ? -0.01 : -0.3;
+                const parallaxAmount = relativeScroll * parallaxSpeed;
+
                 aboutSection.style.backgroundPosition = `center calc(35% + ${parallaxAmount}px)`;
             }
         });
@@ -2160,6 +2217,27 @@
         function hideTooltip() {
             document.getElementById('audio-tooltip').classList.remove('show');
         }
+
+        // Auto-show tooltip after 10 seconds
+        let autoTooltipTimeout = setTimeout(() => {
+            showTooltip();
+        }, 10000);
+
+        // Hide tooltip when clicking anywhere on the screen
+        document.addEventListener('click', (e) => {
+            const tooltip = document.getElementById('audio-tooltip');
+            const muteButton = document.getElementById('mute-btn');
+
+            // Don't hide if clicking the mute button itself
+            if (!muteButton.contains(e.target)) {
+                hideTooltip();
+            }
+        });
+
+        // Clear auto-show if user manually hovers before 10 seconds
+        document.getElementById('mute-btn').addEventListener('mouseenter', () => {
+            clearTimeout(autoTooltipTimeout);
+        });
     </script>
 </body>
 </html>
