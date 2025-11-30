@@ -182,22 +182,17 @@
             box-shadow: 0 1px 0 rgba(21, 21, 22, 0.1);
         }
 
-        .logo {
-            height: 50px;
-            opacity: 0.9;
-        }
-
         .nav-left {
             display: flex;
             align-items: center;
-            gap: 1rem;
         }
 
         .nav-center {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 300;
             letter-spacing: 0.02em;
+            white-space: nowrap;
         }
 
         .nav-center .letter {
@@ -1098,7 +1093,7 @@
         /* Tablet Portrait Mode - Fix heading sizes */
         @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
             .nav-center {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
 
             .section-title {
@@ -1119,13 +1114,13 @@
             }
 
             .nav-center {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
                 flex: 1;
-                text-align: center;
+                text-align: left;
             }
 
             .nav-left {
-                gap: 0.5rem;
+                flex: 1;
             }
 
             .nav-links {
@@ -1175,13 +1170,13 @@
             }
 
             .nav-center {
-                font-size: 1.6rem;
+                font-size: 1.4rem;
                 flex: 1;
-                text-align: center;
+                text-align: left;
             }
 
             .nav-left {
-                gap: 0.5rem;
+                flex: 1;
             }
 
             .nav-links {
@@ -1299,18 +1294,14 @@
                 padding: 0.5rem 3%;
             }
 
-            .logo {
-                height: 35px;
-            }
-
             .nav-center {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
                 flex: 1;
-                text-align: center;
+                text-align: left;
             }
 
             .nav-left {
-                gap: 0.5rem;
+                flex: 1;
             }
 
             /* Show hamburger menu in landscape mobile */
@@ -1481,9 +1472,6 @@
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-left">
-            <a href="#hero">
-                <img src="B_s_Logo-removebg-preview.png" alt="Benjamin T. Rossen Logo" class="logo">
-            </a>
             <div class="nav-center">Benjamin T. Rossen</div>
         </div>
         <div class="menu-toggle" onclick="toggleMenu()">
