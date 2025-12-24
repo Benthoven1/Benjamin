@@ -7,12 +7,12 @@ This website now features an immersive intro experience inspired by Jon Bois's *
 ## Files
 
 ### Main Pages
-- **`intro.html`** - The scrolling intro experience (landing page)
+- **`Welcome`** - The scrolling intro experience (landing page)
 - **`index.html`** - The main website content
 
 ### How It Works
 
-1. **First Visit**: Users land on `intro.html` and experience the scrolling narrative
+1. **First Visit**: Users land on `Welcome` and experience the scrolling narrative
 2. **Scroll Experience**: As users scroll, text appears and "The Unknowable" grows to fill the screen
 3. **Automatic Transition**: At 90% scroll progress, the page automatically transitions to the main site
 4. **Cookie Memory**: A cookie remembers the user has seen the intro
@@ -20,7 +20,7 @@ This website now features an immersive intro experience inspired by Jon Bois's *
 
 ## Features
 
-### Intro Page (`intro.html`)
+### Intro Page (`Welcome`)
 
 #### Visual Effects
 - **Particle System**: 50 animated particles inspired by the poster's sparkle effect
@@ -94,7 +94,7 @@ if (scrollPercent > 0.9 && !hasTransitioned) {
 ## Usage
 
 ### Standard Flow
-1. User visits the site → lands on `intro.html`
+1. User visits the site → lands on `Welcome`
 2. User scrolls through narrative experience
 3. At 90% scroll → automatic transition to `index.html#video`
 4. Cookie set → future visits skip intro
@@ -130,7 +130,7 @@ if (scrollPercent > 0.9 && !hasTransitioned) {
 ## Customization
 
 ### Adjust Scroll Sensitivity
-In `intro.html`, modify the scroll thresholds:
+In `Welcome`, modify the scroll thresholds:
 ```javascript
 if (scrollPercent > 0.6) // Start growing text
 if (scrollPercent > 0.9) // Trigger transition
