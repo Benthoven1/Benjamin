@@ -1,0 +1,19 @@
+# Set default index files for all folders
+DirectoryIndex index.html
+
+# Enable mod_rewrite
+RewriteEngine On
+
+# Redirect explicit index.html URLs to folder URLs
+
+# Welcome
+RewriteCond %{THE_REQUEST} /Welcome/index\.html [NC]
+RewriteRule ^Welcome/index\.html$ /Welcome/ [R=301,L]
+
+# Highlights
+RewriteCond %{THE_REQUEST} /Highlights/index\.html [NC]
+RewriteRule ^Highlights/index\.html$ /Highlights/ [R=301,L]
+
+# About
+RewriteCond %{THE_REQUEST} /About/index\.html [NC]
+RewriteRule ^About/index\.html$ /About/ [R=301,L]
