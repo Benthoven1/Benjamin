@@ -321,8 +321,8 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', (e) => {
             const href = link.getAttribute('href');
 
-            // Apply smooth transition for highlights.html and about.html
-            if (href === 'highlights.html' || href === 'about.html') {
+            // Apply smooth transition for Highlights/index.html and About/index.html
+            if (href === 'Highlights/index.html' || href === 'About/index.html') {
                 e.preventDefault();
                 createSmoothTransition(href);
             }
