@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Unknowable</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(135deg, #1a0a2e 0%, #3d1f5c 50%, #2d1847 100%);
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated particles background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: radial-gradient(circle, #ff6b9d 0%, #c44569 100%);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translate(calc(var(--tx) * 1vw), calc(var(--ty) * 1vh)) scale(1.5);
+                opacity: 1;
+            }
+        }
+
+        /* Flowing ribbon effect */
+        .ribbon {
+            position: fixed;
+            width: 200%;
+            height: 100%;
+            top: 0;
+            left: -50%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.15;
+        }
+
+        .ribbon-path {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Scroll container */
+        .scroll-container {
+            position: relative;
+            z-index: 2;
+            min-height: 500vh;
+        }
+
+        /* Text sections */
+        .text-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .text-content {
+            max-width: 800px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .text-line {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            margin: 1rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .text-line.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Growing text effect - 17776 style */
+        .growing-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            text-align: center;
+            white-space: normal;
+            max-width: 90%;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0;
+            font-size: 2rem;
+            line-height: 1.4;
+            color: #ffffff;
+        }
+
+        .growing-text.active {
+            opacity: 1;
+        }
+
+        /* White overlay that grows with text */
+        .white-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            z-index: 9;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Title text that appears after white fills screen */
+        .title-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            text-align: center;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 15;
+            opacity: 0;
+            font-size: 4rem;
+            color: #1a0a2e;
+            letter-spacing: 2px;
+        }
+
+        .title-text.visible {
+            opacity: 1;
+        }
+
+        /* Transition overlay */
+        .transition-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a0a2e;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease;
+        }
+
+        .transition-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .text-line {
+                font-size: 1.2rem;
+            }
+
+            .title-text {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Flowing ribbon -->
+    <div class="ribbon">
+        <svg class="ribbon-path" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+            <path d="M 0,500 Q 250,300 500,500 T 1000,500"
+                  stroke="#c44569"
+                  stroke-width="80"
+                  fill="none"
+                  opacity="0.3">
+                <animate attributeName="d"
+                         dur="15s"
+                         repeatCount="indefinite"
+                         values="M 0,500 Q 250,300 500,500 T 1000,500;
+                                 M 0,500 Q 250,700 500,500 T 1000,500;
+                                 M 0,500 Q 250,300 500,500 T 1000,500"/>
+            </path>
+        </svg>
+    </div>
+
+    <!-- White overlay -->
+    <div class="white-overlay" id="whiteOverlay"></div>
+
+    <!-- Growing text -->
+    <div class="growing-text" id="growingText">
+        This is The Unknowable: An operatic ballet where voice and movement become one, where Rossen, Berlioz, and Mahler sing of summer nights and wandering souls.
+    </div>
+
+    <!-- Title text -->
+    <div class="title-text" id="titleText">The Unknowable</div>
+
+    <!-- Scroll container -->
+    <div class="scroll-container" id="scrollContainer">
+        <!-- Section 1 -->
+        <div class="text-section">
+            <div class="text-content">
+                <div class="text-line">What happens when you cannot know yourself?</div>
+            </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="text-section">
+            <div class="text-content">
+                <div class="text-line">When the weight of ambition becomes unbearable,</div>
+                <div class="text-line">and familial expectations press from all sides—</div>
+            </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="text-section">
+            <div class="text-content">
+                <div class="text-line">Do you retreat into dream?</div>
+                <div class="text-line">Or confront the unknowable within?</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Transition overlay -->
+    <div class="transition-overlay" id="transitionOverlay"></div>
+
+    <script>
+        // Create particles
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 50;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.setProperty('--tx', (Math.random() - 0.5) * 20);
+            particle.style.setProperty('--ty', (Math.random() - 0.5) * 20);
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Scroll effects
+        const textSections = document.querySelectorAll('.text-section');
+        const textLines = document.querySelectorAll('.text-line');
+        const growingText = document.getElementById('growingText');
+        const whiteOverlay = document.getElementById('whiteOverlay');
+        const titleText = document.getElementById('titleText');
+        const finalSection = document.getElementById('finalSection');
+        const transitionOverlay = document.getElementById('transitionOverlay');
+
+        let hasTransitioned = false;
+        let growthTriggered = false;
+        let maxFontSize = 2; // Start at 2rem
+        let whiteOpacity = 0;
+        let autoAnimating = false;
+
+        function updateScroll() {
+            const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+            const windowHeight = window.innerHeight;
+            const scrollY = window.scrollY;
+
+            // Reveal text lines
+            textLines.forEach(line => {
+                const rect = line.getBoundingClientRect();
+                if (rect.top < windowHeight * 0.8) {
+                    line.classList.add('visible');
+                }
+            });
+
+            // Fade in text at 70% scroll
+            if (scrollPercent >= 0.7 && !growthTriggered) {
+                growingText.classList.add('active');
+                if (scrollPercent < 0.9) {
+                    growingText.style.fontSize = '2rem'; // Keep at initial size
+                }
+            }
+
+            // Trigger growth at 90% scroll (one-directional, irreversible)
+            if (scrollPercent >= 0.9 && !growthTriggered) {
+                growthTriggered = true;
+                growingText.classList.add('active');
+                startAutoGrowth();
+            }
+        }
+
+        // Automatic growth animation after trigger
+        function startAutoGrowth() {
+            if (autoAnimating) return;
+            autoAnimating = true;
+
+            let startTime = null;
+            const duration = 4000; // 4 seconds to grow
+            const maxSize = 150; // Maximum font size
+            const startSize = maxFontSize;
+
+            function animate(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const progress = (timestamp - startTime) / duration;
+
+                if (progress < 1) {
+                    // Exponential growth for dramatic effect
+                    const currentSize = startSize + (maxSize - startSize) * Math.pow(progress, 1.5);
+                    maxFontSize = currentSize;
+                    growingText.style.fontSize = currentSize + 'rem';
+
+                    // White overlay grows with text
+                    whiteOpacity = Math.min(1, Math.pow(progress, 0.8));
+                    whiteOverlay.style.opacity = whiteOpacity;
+
+                    requestAnimationFrame(animate);
+                } else {
+                    // Final state
+                    maxFontSize = maxSize;
+                    growingText.style.fontSize = maxSize + 'rem';
+                    whiteOverlay.style.opacity = 1;
+
+                    // Show title after white fills screen
+                    setTimeout(() => {
+                        showTitle();
+                    }, 500);
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // Show title text emerging from white
+        function showTitle() {
+            let startTime = null;
+            const duration = 2000; // 2 seconds fade in
+
+            function fadeIn(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const progress = (timestamp - startTime) / duration;
+
+                if (progress < 1) {
+                    titleText.style.opacity = progress;
+                    requestAnimationFrame(fadeIn);
+                } else {
+                    titleText.style.opacity = 1;
+                    titleText.classList.add('visible');
+
+                    // After title is visible, wait then transition
+                    setTimeout(() => {
+                        if (!hasTransitioned) {
+                            hasTransitioned = true;
+                            setCookie('intro_seen', 'true', 365);
+                            transitionToMain();
+                        }
+                    }, 2000);
+                }
+            }
+
+            requestAnimationFrame(fadeIn);
+        }
+
+        function transitionToMain() {
+            transitionOverlay.classList.add('active');
+            setTimeout(() => {
+                window.location.href = 'highlights.html';
+            }, 1000);
+        }
+
+        function setCookie(name, value, days) {
+            const expires = new Date();
+            expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+            document.cookie = name + '=' + value + ';expires=' + expires.toUTCString() + ';path=/';
+        }
+
+        function getCookie(name) {
+            const nameEQ = name + '=';
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        // Check cookie on load
+        window.addEventListener('load', () => {
+            if (getCookie('intro_seen') === 'true') {
+                window.location.href = 'highlights.html';
+            }
+        });
+
+        // Scroll listener
+        window.addEventListener('scroll', updateScroll);
+        updateScroll(); // Initial call
+    </script>
+</body>
+</html>
