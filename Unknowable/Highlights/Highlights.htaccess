@@ -1,3 +1,0 @@
-DirectoryIndex Highlights/index.html
-RewriteEngine On
-RewriteRule ^index\.html$ /Highlights/ [R=301,L]
