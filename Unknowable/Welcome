@@ -397,7 +397,7 @@
         function transitionToMain() {
             transitionOverlay.classList.add('active');
             setTimeout(() => {
-                window.location.href = 'highlights.html';
+                window.location.href = 'Highlights';
             }, 1000);
         }
 
@@ -421,7 +421,7 @@
         // Check cookie on load
         window.addEventListener('load', () => {
             if (getCookie('intro_seen') === 'true') {
-                window.location.href = 'highlights.html';
+                window.location.href = 'Highlights';
             }
         });
 
