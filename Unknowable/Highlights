@@ -16,7 +16,7 @@
             <a href="Highlights" class="nav-logo">THE UNKNOWABLE</a>
             <ul class="nav-menu">
                 <li><a href="Highlights" class="nav-link active">Highlights</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="About" class="nav-link">About</a></li>
             </ul>
         </div>
     </nav>
